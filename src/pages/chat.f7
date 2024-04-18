@@ -1,0 +1,83 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="title">Gemini Chat</div>
+      </div>
+    </div>
+    <div class="toolbar messagebar">
+      <div class="toolbar-inner">
+        <div class="messagebar-area">
+          <textarea class="resizable" placeholder="Message" id="message"></textarea>
+        </div>
+        <a class="link send-link" href="#" @click=${send}>Send</a>
+      </div>
+    </div>
+    <div class="page-content">
+        <div class="page-content messages-content">
+            <div class="messages">
+                ${ messages.map(message => $h`
+                    <div class="message message-${message.role === 'user' ? 'sent' : 'received'}">
+                        <div class="message-content">
+                        <!-- Speech bubble with text -->
+                        <div class="message-bubble">
+                            <div class="message-text">${message.message}</div>
+                        </div>
+                        </div>
+                    </div>
+                `)}
+            </div>
+        </div>
+    </div>
+  </div>
+</template>
+<script>
+export default function (props, {$f7, $on, $update, $onMounted }) {
+  // JavaScript code goes here
+  // Define variables used in the screen
+  // Message history
+  const messages = [];
+  // Gemini chat object
+  let chat;
+
+  // Create the chat object
+  $onMounted(() => {
+    chat = geminiModel.startChat({
+      history: [],
+      generationConfig: {
+        maxOutputTokens: 100,
+      },
+    });
+  });
+
+  const send = async (e) => {
+    // Compose the input message
+    const message = document.querySelector("#message");
+    const text = message.value;
+    if (text === "") return;
+    messages.push({
+            role: "user",
+            message: text,
+    });
+    $update(); // Update the view
+    // Get the response from Gemini
+    const response = await answer(text);
+    messages.push({
+            role: "system",
+            message: response,
+    });
+    message.value = "";
+    $update(); // Update the view
+};
+
+// https://ai.google.dev/tutorials/web_quickstart?hl=en
+const answer = async (text) => {
+  const result = await chat.sendMessage(text);
+  const response = await result.response;
+  return response.text();
+};
+    
+  return $render;
+}
+</script>
