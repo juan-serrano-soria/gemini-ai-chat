@@ -1,0 +1,43 @@
+{
+  "name": "framework7-v8-core-single-view",
+  "private": true,
+  "version": "1.0.3",
+  "description": "framework7-v8-core-single-view",
+  "repository": "",
+  "license": "UNLICENSED",
+  "engines": {
+      "node": "~18.16.0",
+      "npm": "~9.5.0"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "cross-env NODE_ENV=development vite",
+    "build": "cross-env NODE_ENV=production vite build",
+    "installfont": "cpy --flat ./node_modules/framework7-icons/fonts/*.* ./src/fonts/ && cpy --flat ./node_modules/material-icons/iconfont/*.* ./src/fonts/",
+    "watch": "cross-env NODE_ENV=development vite build --watch",
+    "monaca:preview": "npm run dev & npm run watch",
+    "monaca:transpile": "npm run build",
+    "monaca:debug": "npm run watch"
+  },
+  "browserslist": [
+    "IOS >= 15",
+    "Safari >= 15",
+    "last 5 Chrome versions",
+    "last 5 Firefox versions"
+  ],
+  "dependencies": {
+    "dom7": "^4.0.6",
+    "framework7": "^8.0.5",
+    "framework7-icons": "^5.0.5",
+    "material-icons": "^1.13.8",
+    "skeleton-elements": "^4.0.1",
+    "swiper": "^9.3.2"
+  },
+  "devDependencies": {
+    "cpy-cli": "^4.2.0",
+    "cross-env": "^7.0.3",
+    "postcss-preset-env": "^8.4.2",
+    "rollup-plugin-framework7": "^1.2.1",
+    "vite": "^4.3.9"
+  }
+}
