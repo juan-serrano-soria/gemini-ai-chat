@@ -1,8 +1,6 @@
 
 import path from 'path';
 import framework7 from 'rollup-plugin-framework7';
-import { importMaps } from 'vite-plugin-import-maps';
-
 
 const SRC_DIR = path.resolve(__dirname, './src');
 const PUBLIC_DIR = path.resolve(__dirname, './public');
@@ -13,13 +11,7 @@ export default async () => {
   return  {
     plugins: [
       framework7({ emitCss: false }),
-      importMaps([
-        {
-        imports: {
-          "@google/generative-ai": "https://esm.run/@google/generative-ai",
-        },
-      }
-      ]),
+
     ],
     root: SRC_DIR,
     base: '',
