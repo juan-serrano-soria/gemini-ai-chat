@@ -61,18 +61,12 @@ jobs:
       run: |
         cordova build android
 
-    - name: Set up emulator
+    - name: Set up emulator, install apk and run tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
         script: |
           echo "Emulator has started"
-
-    - name: Install APK on emulator
-      run: |
-        adb install platforms/android/app/build/outputs/apk/debug/app-debug.apk
-
-    - name: Run tests
-      run: |
-        export API_KEY=${{ secrets.API_KEY }}
-        python src/tests/test.py
+          adb install platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          export API_KEY=${{ secrets.API_KEY }}
+          python src/tests/test.py
