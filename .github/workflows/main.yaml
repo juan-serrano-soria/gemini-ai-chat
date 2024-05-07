@@ -25,10 +25,6 @@ jobs:
       run: |
         npm ci
 
-    - name: Build app
-      run: |
-        npm run build
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -53,12 +49,30 @@ jobs:
         sudo udevadm control --reload-rules
         sudo udevadm trigger --name-match=kvm
 
-    - name: Set up emulator and run tests
+    - name: Install Cordova
+      run: |
+        npm install -g cordova
+
+    - name: Add Android platform to Cordova
+      run: |
+        cordova platform add android
+
+    - name: Build Cordova app
+      run: |
+        cordova build android
+
+    - name: Set up emulator
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
         script: |
           echo "Emulator has started"
-          adb devices
-          export API_KEY=${{ secrets.API_KEY }}
-          python src/tests/test.py
+
+    - name: Install APK on emulator
+      run: |
+        adb install platforms/android/app/build/outputs/apk/debug/app-debug.apk
+
+    - name: Run tests
+      run: |
+        export API_KEY=${{ secrets.API_KEY }}
+        python src/tests/test.py
