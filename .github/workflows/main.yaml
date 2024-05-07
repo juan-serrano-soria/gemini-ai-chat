@@ -44,6 +44,10 @@ jobs:
       run: |
         pip install Appium-Python-Client
 
+    - name: Install Appium driver
+      run: |
+        npx appium driver install uiautomator2
+
     - name: Start Appium server
       run: |
         npx appium &
