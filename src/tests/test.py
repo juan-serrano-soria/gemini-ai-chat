@@ -2,6 +2,7 @@ import unittest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
+from appium.webdriver.common.mobileby import MobileBy
 
 capabilities = dict(
     platformName='Android',
