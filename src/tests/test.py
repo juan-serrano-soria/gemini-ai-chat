@@ -2,7 +2,6 @@ import unittest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
-from appium.webdriver.common.mobileby import MobileBy
 
 capabilities = dict(
     platformName='Android',
@@ -25,12 +24,12 @@ class TestAppium(unittest.TestCase):
             self.driver.quit()
 
     def test_gemi(self) -> None:
-        input_element = self.driver.find_element(MobileBy.XPATH, '//android.widget.EditText')
+        input_element = self.driver.find_element(AppiumBy.XPATH, '//android.widget.EditText')
         input_element.send_keys('What is the capital of Japan?')
-        link = self.driver.find_element(MobileBy.XPATH, '//android.widget.TextView[@text="Send"]')
+        link = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Send"]')
         link.click()
         time.sleep(2)  # wait for 2 seconds
-        text_element = self.driver.find_element(MobileBy.XPATH, '//android.widget.TextView[@text="Tokyo"]')
+        text_element = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Tokyo"]')
 
         # wait up to 5 seconds for the text element to exist
         for _ in range(5):
