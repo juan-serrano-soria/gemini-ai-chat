@@ -6,7 +6,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 capabilities = dict(
     platformName='Android',
     automationName='uiautomator2',
-    deviceName='Android',
+    deviceName='emulator-5554',
     appPackage='com.example.framework7',
     appActivity='.MainActivity',
     language='en',
