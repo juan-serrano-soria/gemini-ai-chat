@@ -45,7 +45,9 @@ jobs:
         pip install Appium-Python-Client
 
     - name: Start Appium server
-      run: npx appium &
+      run: |
+        npx appium &
+        sleep 10
 
     - name: Run tests
       run: |
