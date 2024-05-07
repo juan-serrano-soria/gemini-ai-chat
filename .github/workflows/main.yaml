@@ -20,7 +20,9 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
-        script: echo "Emulator has started"
+        script: |
+          echo "Emulator has started"
+          adb devices
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
