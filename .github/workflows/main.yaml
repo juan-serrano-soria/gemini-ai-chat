@@ -50,5 +50,5 @@ jobs:
     - name: Run tests
       run: |
         export API_KEY=${{ secrets.API_KEY }}
-        python tests/test.py
+        python src/tests/test.py
       shell: bash
