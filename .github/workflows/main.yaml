@@ -50,6 +50,12 @@ jobs:
       run: |
         cordova build android
 
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Set ANDROID_HOME environment variable
+      run: echo "ANDROID_HOME=$HOME/Library/Android/sdk" >> $GITHUB_ENV
+
     - name: Run Android Emulator
       run: |
         echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
