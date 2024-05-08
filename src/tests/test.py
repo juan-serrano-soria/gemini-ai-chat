@@ -1,5 +1,8 @@
 import unittest
+import time
 from appium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 
@@ -24,7 +27,8 @@ class TestAppium(unittest.TestCase):
             self.driver.quit()
 
     def test_gemi(self) -> None:
-        input_element = self.driver.find_element(AppiumBy.XPATH, '//android.widget.EditText')
+        wait = WebDriverWait(self.driver, 10)  # wait up to 10 seconds
+        input_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.EditText')))
         input_element.send_keys('What is the capital of Japan?')
         link = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Send"]')
         link.click()
