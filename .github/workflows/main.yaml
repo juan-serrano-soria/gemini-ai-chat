@@ -60,6 +60,22 @@ jobs:
         distribution: 'adopt'
         id: jdk8
 
+    - name: Cache Android SDK
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.ANDROID_SDK_ROOT }}
+        key: ${{ runner.os }}-android-sdk-${{ hashFiles('**/*.gradle') }}
+        restore-keys: |
+          ${{ runner.os }}-android-sdk-
+
+    - name: Cache Android Emulator System Images
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.ANDROID_HOME }}/system-images
+        key: ${{ runner.os }}-android-emulator-${{ hashFiles('**/*.gradle') }}
+        restore-keys: |
+          ${{ runner.os }}-android-emulator-
+
     - name: Run Android Emulator
       run: |
         echo "y" | $ANDROID_SDK_ROOT/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
