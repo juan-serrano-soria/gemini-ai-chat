@@ -33,7 +33,7 @@ class TestAppium(unittest.TestCase):
         input_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.EditText')))
         input_element.send_keys('What is the capital of Japan?')
         self.driver.get_screenshot_as_file('screenshot_after_input.png')
-        link = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Send"]')
+        link = wait.until(EC.presence_of_element_located((AppiumBy.XPATH,  '//android.widget.TextView[@text="Send"]')))
         link.click()
         time.sleep(2)  # wait for 2 seconds
         text_element = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Tokyo"]')
