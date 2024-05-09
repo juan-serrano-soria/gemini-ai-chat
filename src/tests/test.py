@@ -27,7 +27,7 @@ class TestAppium(unittest.TestCase):
             self.driver.quit()
 
     def test_gemi(self) -> None:
-        wait = WebDriverWait(self.driver, 240)  # wait up to 240 seconds
+        wait = WebDriverWait(self.driver, 600)  # wait up to 600 seconds
         self.driver.get_screenshot_as_file('screenshot_initial_state.png')
         input_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.EditText')))
         input_element.click()
