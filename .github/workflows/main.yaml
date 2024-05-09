@@ -49,17 +49,17 @@ jobs:
         sudo udevadm control --reload-rules
         sudo udevadm trigger --name-match=kvm
 
-    - name: Install Cordova
+    - name: Install Framework7 CLI
       run: |
-        npm install -g cordova
+        npm install -g framework7-cli
 
     - name: Add Android platform to Cordova
       run: |
-        cordova platform add android
+        framework7 cordova platform add android
 
     - name: Build Cordova app
       run: |
-        cordova build android
+        framework7 cordova build android
 
     - name: Set up emulator, install apk and run tests
       uses: reactivecircus/android-emulator-runner@v2
