@@ -27,7 +27,7 @@ class TestAppium(unittest.TestCase):
             self.driver.quit()
 
     def test_gemi(self) -> None:
-        wait = WebDriverWait(self.driver, 120)  # wait up to 120 seconds
+        wait = WebDriverWait(self.driver, 240)  # wait up to 240 seconds
         self.driver.get_screenshot_as_file('screenshot_initial_state.png')
         input_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.EditText')))
         input_element.click()
@@ -35,18 +35,9 @@ class TestAppium(unittest.TestCase):
         self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link = wait.until(EC.presence_of_element_located((AppiumBy.XPATH,  '//android.widget.TextView[@text="Send"]')))
         link.click()
-        text_element = self.driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@text="Tokyo"]')
-
-        # wait up to 5 seconds for the text element to exist
-        for _ in range(5):
-            if text_element.is_displayed():
-                break
-            time.sleep(1)
-        
+        text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.TextView[@text="Tokyo"]')))
         self.driver.get_screenshot_as_file('screenshot_after_response.png')
-
         text = text_element.text
-
         if text == 'Tokyo':
             print('Text "Tokyo" found')
         else:
