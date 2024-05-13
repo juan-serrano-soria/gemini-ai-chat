@@ -1,5 +1,4 @@
 const {remote} = require('webdriverio');
-const url = require('url');
 
 const capabilities = {
   platformName: 'Android',
@@ -9,12 +8,9 @@ const capabilities = {
   'appium:appActivity': '.MainActivity',
 };
 
-const appium_server_url = 'http://localhost:4723';
-const parsedUrl = new URL(appium_server_url);
-
 const wdOpts = {
-  hostname: parsedUrl.hostname,
-  port: parseInt(parsedUrl.port, 10),
+  hostname: process.env.APPIUM_HOST || 'localhost',
+  port: parseInt(process.env.APPIUM_PORT, 10) || 4723,
   logLevel: 'info',
   capabilities,
 };
