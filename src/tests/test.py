@@ -32,6 +32,7 @@ class TestAppium(unittest.TestCase):
         self.driver.get_screenshot_as_file('screenshot_initial_state.png')
         input_element.click()
         input_element.send_keys('What is the capital of Japan?')
+        wait.until(lambda driver: input_element.get_attribute('text') == 'What is the capital of Japan?')
         link = wait.until(EC.presence_of_element_located((AppiumBy.XPATH,  '//*[@text="Send"]')))
         self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link.click()
