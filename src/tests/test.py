@@ -36,7 +36,7 @@ class TestAppium(unittest.TestCase):
         link = wait.until(EC.presence_of_element_located((AppiumBy.XPATH,  '//*[@text="Send"]')))
         self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link.click()
-        time.sleep(60)
+        time.sleep(30)
         self.driver.get_screenshot_as_file('screenshot_after_send.png')
         text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//*[@text="Tokyo"]')))
         text = text_element.text
