@@ -28,20 +28,20 @@ class TestAppium(unittest.TestCase):
 
     def test_gemi(self) -> None:
         wait = WebDriverWait(self.driver, 600)  # wait up to 600 seconds
-        self.driver.get_screenshot_as_file('screenshot_initial_state.png')
         input_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.EditText')))
+        self.driver.get_screenshot_as_file('screenshot_initial_state.png')
         input_element.click()
         input_element.send_keys('What is the capital of Japan?')
-        self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link = wait.until(EC.presence_of_element_located((AppiumBy.XPATH,  '//*[@text="Send"]')))
+        self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link.click()
-        text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//android.widget.TextView[@text="Tokyo"]')))
-        self.driver.get_screenshot_as_file('screenshot_after_response.png')
+        text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//*[@text="Tokyo"]')))
         text = text_element.text
         if text == 'Tokyo':
             print('Text "Tokyo" found')
         else:
             print('Text "Tokyo" not found')
+        self.driver.get_screenshot_as_file('screenshot_after_response.png')
 
 if __name__ == '__main__':
     unittest.main()
