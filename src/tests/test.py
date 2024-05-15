@@ -1,5 +1,6 @@
 import unittest
 import time
+import base64
 from appium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -21,8 +22,14 @@ appium_server_url = 'http://localhost:4723'
 class TestAppium(unittest.TestCase):
     def setUp(self) -> None:
         self.driver = webdriver.Remote(appium_server_url, options=UiAutomator2Options().load_capabilities(capabilities))
+        self.driver.start_recording_screen()
 
     def tearDown(self) -> None:
+        # Stop the screen recording and save the video file
+        video_data = self.driver.stop_recording_screen()
+        with open("screen_recording.mp4", "wb") as out_file:
+            out_file.write(base64.b64decode(video_data))
+
         if self.driver:
             self.driver.quit()
 

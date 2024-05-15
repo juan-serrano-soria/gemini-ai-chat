@@ -83,3 +83,10 @@ jobs:
       with:
         name: screenshots
         path: '*.png'
+
+    - name: Upload screen recording
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: screen_recording
+        path: 'screen_recording.mp4'
