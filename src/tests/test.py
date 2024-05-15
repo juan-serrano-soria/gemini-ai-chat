@@ -1,5 +1,4 @@
 import unittest
-import time
 import base64
 from appium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -30,6 +29,9 @@ class TestAppium(unittest.TestCase):
         with open("screen_recording.mp4", "wb") as out_file:
             out_file.write(base64.b64decode(video_data))
 
+        self.driver.get_screenshot_as_file('screenshot_on_teardown.png')
+
+
         if self.driver:
             self.driver.quit()
 
@@ -43,8 +45,6 @@ class TestAppium(unittest.TestCase):
         link = wait.until(EC.presence_of_element_located((AppiumBy.XPATH,  '//*[@text="Send"]')))
         self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link.click()
-        time.sleep(30)
-        self.driver.get_screenshot_as_file('screenshot_after_send.png')
         text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//*[@text="Tokyo"]')))
         text = text_element.text
         if text == 'Tokyo':
