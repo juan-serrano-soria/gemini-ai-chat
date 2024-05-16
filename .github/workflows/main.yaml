@@ -21,6 +21,14 @@ jobs:
       with:
         node-version: '18'
 
+    - name: Cache npm dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
     - name: Install app dependencies
       run: |
         npm ci
@@ -56,6 +64,24 @@ jobs:
     - name: Install Cordova
       run: |
         npm install -g cordova
+
+    - name: Cache Cordova platforms
+      uses: actions/cache@v2
+      with:
+        path: platforms
+        key: ${{ runner.os }}-cordova-platforms-${{ hashFiles('**/config.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-cordova-platforms-
+
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
 
     - name: Add Android platform to Cordova
       run: |
