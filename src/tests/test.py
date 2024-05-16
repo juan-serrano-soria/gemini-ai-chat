@@ -46,6 +46,7 @@ class TestAppium(unittest.TestCase):
         self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link.click()
         text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//*[@text="What is the capital of Japan?"]')))
+        self.driver.get_screenshot_as_file('screenshot_after_click.png')
 
 if __name__ == '__main__':
     unittest.main()
