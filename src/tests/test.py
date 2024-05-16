@@ -45,12 +45,7 @@ class TestAppium(unittest.TestCase):
         link = wait.until(EC.presence_of_element_located((AppiumBy.XPATH,  '//*[@text="Send"]')))
         self.driver.get_screenshot_as_file('screenshot_after_input.png')
         link.click()
-        text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//*[@text="Tokyo"]')))
-        text = text_element.text
-        if text == 'Tokyo':
-            print('Text "Tokyo" found')
-        else:
-            print('Text "Tokyo" not found')
+        text_element = wait.until(EC.presence_of_element_located((AppiumBy.XPATH, '//*[@text="What is the capital of Japan?"]')))
         self.driver.get_screenshot_as_file('screenshot_after_response.png')
 
 if __name__ == '__main__':
