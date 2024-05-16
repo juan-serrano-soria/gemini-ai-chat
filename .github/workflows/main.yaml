@@ -77,9 +77,7 @@ jobs:
 
     - name: Add Android platform to Cordova
       run: |
-        if ! cordova platform ls | grep -q 'android'; then
-          cordova platform add android
-        fi
+        cordova platform add android
 
     - name: Build Cordova app
       run: |
