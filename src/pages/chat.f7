@@ -43,12 +43,14 @@ export default function (props, {$f7, $on, $update, $onMounted }) {
 
   // Create the chat object
   $onMounted(() => {
-    chat = geminiModel.startChat({
-      history: [],
-      generationConfig: {
-        maxOutputTokens: 100,
-      },
-    });
+    setTimeout(() => {
+      chat = geminiModel.startChat({
+        history: [],
+        generationConfig: {
+          maxOutputTokens: 100,
+        },
+      });
+    }, 5000); // Delay of 2 seconds
   });
 
   const send = async (e) => {
