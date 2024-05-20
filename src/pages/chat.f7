@@ -50,7 +50,7 @@ export default function (props, {$f7, $on, $update, $onMounted }) {
           maxOutputTokens: 100,
         },
       });
-    }, 5000); // Delay of 2 seconds
+    }, 120000); // Delay of 2 minutes
   });
 
   const send = async (e) => {
